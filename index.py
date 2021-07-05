@@ -1,4 +1,3 @@
-from genericpath import samefile
 from PyQt5.QtGui import QIcon, QPixmap
 from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget
 from PyQt5.uic import loadUiType
@@ -51,25 +50,26 @@ class MainApp(QMainWindow, Main_Ui):
         self.prepareFiles.setEnabled(False)
         # Start automation
         for n in range(1,31):
-            lackey.click(self.location + "/src/browse.png")
-            lackey.click(self.location + "/src/name.png")
+            lackey.click(self.location + r"\src\browse.png")
+            lackey.click(self.location + r"\src\name.png")
             lackey.type("%d.bin" % n)
-            lackey.click(self.location + "/src/open.png")
-            lackey.click(self.location + "/src/mode.png")
+            lackey.click(self.location + r"\src\open.png")
+            lackey.click(self.location + r"\src\mode.png")
             press("u")
             press("enter")
-            lackey.click(self.location + "/src/next.png")
-            if lackey.exists(self.location + "/src/error.png", 8):
-                lackey.click(self.location + "/src/back.png")
+            lackey.click(self.location + r"\src\next.png")
+            if lackey.exists(self.location + r"\src\error.png", 8):
+                lackey.click(self.location + r"\src\back.png")
             else:
-                lackey.wait(self.location + "/src/next2.png", 6)
-                lackey.click(self.location + "/src/next2.png")
-                lackey.wait(self.location + "/src/finish.png", 8)
-                lackey.click(self.location + "/src/finish.png")
+                lackey.wait(self.location + r"\src\next2.png", 6)
+                lackey.click(self.location + r"\src\next2.png")
+                lackey.wait(self.location + r"\src\finish.png", 8)
+                lackey.click(self.location + r"\src\finish.png")
                 break
         # Enable buttons again
         self.startOperation.setEnabled(True)
         self.prepareFiles.setEnabled(True)
+        self.status.setHtml('<p align="center"><span style=" font-size:11pt; font-weight:600; color:#ff0000;">Down</span></p>')
 
     def get_fileName_ready(self):
         if path.isdir(self.binFilesPath):
