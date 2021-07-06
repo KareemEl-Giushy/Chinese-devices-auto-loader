@@ -1,5 +1,5 @@
 from PyQt5.QtGui import QIcon, QPixmap
-from PyQt5.QtWidgets import QApplication, QLCDNumber, QMainWindow, QWidget
+from PyQt5.QtWidgets import QApplication, QFileDialog, QMainWindow, QWidget
 from PyQt5.uic import loadUiType
 import os
 from os import path
@@ -43,7 +43,9 @@ class MainApp(QMainWindow, Main_Ui):
         self.prepareFiles.clicked.connect(self.get_fileName_ready)
         self.startOperation.clicked.connect(self.start_operation)
         self.actionCreator.triggered.connect(self.creator)
-
+        # self.folderPath.textChanged.connect()
+        self.folderPath.textChanged.connect(self.changeValue)
+    
     def start_operation(self):
         print("Operation Started")
         # Disable buttons
@@ -89,17 +91,31 @@ class MainApp(QMainWindow, Main_Ui):
 
     def get_fileName_ready(self):
         if path.isdir(self.binFilesPath):
-            if os.listdir(self.binFilesPath)[0][-1:-3].lower() == 'bin':
+            # print(os.listdir(self.binFilesPath)[0][-3:].lower())
+            if os.listdir(self.binFilesPath)[0][-3:].lower() == 'bin':
                 Counter = 1
                 for f in os.listdir(self.binFilesPath):
-                    os.rename(f, path.join(path.dirname(f), Counter))
+                    if f.isnumeric():
+                        if not int(f[:-4]) in range(0, 31):
+                            os.rename(path.join(self.binFilesPath, f), path.join(self.binFilesPath, str(Counter) + '.bin'))    
+                    else:
+                        os.rename(path.join(self.binFilesPath, f), path.join(self.binFilesPath, str(Counter) + '.bin'))
+
                     Counter += 1
                 self.statusPrepare.setHtml('<p align="center"><span style=" font-size:11pt; font-weight:600; color:#00aa00;">تم</span></p>')
                 return 0
+        
         self.statusPrepare.setHtml('<p align="center"><span style=" font-size:11pt; font-weight:600; color:#ff0000;">خطأ في المكان</span></p>')
 
     def browse_file(self):
-        pass
+        fname = QFileDialog.getExistingDirectory(self, 'Select Directory')
+        # fname = QFileDialog.getOpenFileName(self, 'Open File', "C:\\")
+        if fname:
+            self.binFilesPath = fname
+            self.folderPath.setText(self.binFilesPath)
+    
+    def changeValue(self):
+        self.binFilesPath = self.folderPath.text()
 
     def creator(self):
         c = Creator()
