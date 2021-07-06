@@ -38,13 +38,13 @@ class MainApp(QMainWindow, Main_Ui):
         self.status.setHtml('<p align="center"><span style=" font-size:11pt; font-weight:600; color:#ff0000;">Down</span></p>')
         self.statusPrepare.setHtml('')
         self.statusOperation.setHtml('')
+        self.folderPath.setText(self.store_location(False))
         # self.fileNumber
         self.browseFile.clicked.connect(self.browse_file)
         self.prepareFiles.clicked.connect(self.get_fileName_ready)
         self.startOperation.clicked.connect(self.start_operation)
         self.actionCreator.triggered.connect(self.creator)
-        # self.folderPath.textChanged.connect()
-        self.folderPath.textChanged.connect(self.changeValue)
+        self.folderPath.textChanged.connect(self.change_value)
     
     def start_operation(self):
         print("Operation Started")
@@ -108,15 +108,31 @@ class MainApp(QMainWindow, Main_Ui):
         self.statusPrepare.setHtml('<p align="center"><span style=" font-size:11pt; font-weight:600; color:#ff0000;">خطأ في المكان</span></p>')
 
     def browse_file(self):
-        fname = QFileDialog.getExistingDirectory(self, 'Select Directory')
+        fname = QFileDialog.getExistingDirectory(self, 'تحديد مكان ملفات القنوات', 'C:\\')
         # fname = QFileDialog.getOpenFileName(self, 'Open File', "C:\\")
         if fname:
             self.binFilesPath = fname
             self.folderPath.setText(self.binFilesPath)
+            # self.store_location()
     
-    def changeValue(self):
+    def change_value(self):
         self.binFilesPath = self.folderPath.text()
-
+    
+    def store_location(self, write=True):
+        if not path.exists(path.join(path.dirname(__file__), 'location.txt')):
+            f = open('location.txt', 'x')
+            f.close()
+        
+        if write:
+            with open('location.txt', 'w') as f:
+                f.writelines(self.binFilesPath)
+                f.close()
+        else: 
+            with open('location.txt', 'r') as f:
+                self.binFilesPath = f.readline()
+                f.close()
+        return self.binFilesPath
+    
     def creator(self):
         c = Creator()
         c.show()
