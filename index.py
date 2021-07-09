@@ -39,6 +39,7 @@ class MainApp(QMainWindow, Main_Ui):
         self.statusPrepare.setHtml('')
         self.statusOperation.setHtml('')
         self.folderPath.setText(self.store_location(False))
+        self.fileNumber.display(0)
         # self.fileNumber
         self.browseFile.clicked.connect(self.browse_file)
         self.prepareFiles.clicked.connect(self.get_fileName_ready)
