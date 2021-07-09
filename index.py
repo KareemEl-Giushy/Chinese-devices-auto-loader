@@ -108,7 +108,7 @@ class MainApp(QMainWindow, Main_Ui):
         self.statusPrepare.setHtml('<p align="center"><span style=" font-size:11pt; font-weight:600; color:#ff0000;">خطأ في المكان</span></p>')
 
     def browse_file(self):
-        fname = QFileDialog.getExistingDirectory(self, 'تحديد مكان ملفات القنوات', 'C:\\')
+        fname = QFileDialog.getExistingDirectory(self, 'تحديد مكان ملفات القنوات',  self.binFilesPath if self.binFilesPath else 'C:\\')
         # fname = QFileDialog.getOpenFileName(self, 'Open File', "C:\\")
         if fname:
             self.binFilesPath = fname
