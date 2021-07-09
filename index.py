@@ -113,7 +113,7 @@ class MainApp(QMainWindow, Main_Ui):
         if fname:
             self.binFilesPath = fname
             self.folderPath.setText(self.binFilesPath)
-            # self.store_location()
+            self.store_location()
     
     def change_value(self):
         self.binFilesPath = self.folderPath.text()
@@ -124,11 +124,11 @@ class MainApp(QMainWindow, Main_Ui):
             f.close()
         
         if write:
-            with open('location.txt', 'w') as f:
+            with open('location.txt', 'wt') as f:
                 f.writelines(self.binFilesPath)
                 f.close()
         else: 
-            with open('location.txt', 'r') as f:
+            with open('location.txt', 'rt') as f:
                 self.binFilesPath = f.readline()
                 f.close()
         return self.binFilesPath
