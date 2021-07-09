@@ -327,12 +327,6 @@ p, li { white-space: pre-wrap; }
     </property>
     <addaction name="actionCreator"/>
    </widget>
-   <widget class="QMenu" name="menu">
-    <property name="title">
-     <string>ملف</string>
-    </property>
-   </widget>
-   <addaction name="menu"/>
    <addaction name="menuAbout"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>

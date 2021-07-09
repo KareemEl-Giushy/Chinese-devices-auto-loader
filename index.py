@@ -49,8 +49,8 @@ class MainApp(QMainWindow, Main_Ui):
     def start_operation(self):
         print("Operation Started")
         # Disable buttons
-        self.startOperation.setEnabled(False)
-        self.prepareFiles.setEnabled(False)
+        self.startOperation.setEnabled(False) # bug Dosen't Work
+        self.prepareFiles.setEnabled(False) # bug Dosen't Work
         # Change Word
         self.status.setHtml('<p align="center"><span style=" font-size:11pt; font-weight:600; color:#00aa00;">Up</span></p>')
         self.statusOperation.setHtml('<p align="center"><span style=" font-size:11pt; font-weight:600;">جاري التشغيل</span></p>')
