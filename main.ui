@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>حماده للاجهزة الصيني</string>
+   <string>ملفات قنوات الرسيفرات الصيني</string>
   </property>
   <property name="layoutDirection">
    <enum>Qt::RightToLeft</enum>

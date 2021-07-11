@@ -15,7 +15,7 @@ class Creator(QWidget, theCreator):
         super().__init__(parent=parent)
         self.setupUi(self)
         self.setFixedSize(380, 550)
-        # self.setWindowIcon(QIcon(path.join(path.dirname(__file__), 'Icon.ico')))
+        self.setWindowIcon(QIcon(path.join(path.dirname(__file__), 'loader.ico')))
         self.App()
     
     def App(self):
@@ -31,7 +31,7 @@ class MainApp(QMainWindow, Main_Ui):
         self.binFilesPath = ""
         # Start Seting Up The Ui
         self.setFixedSize(311, 446)
-        # self.setWindowIcon(QIcon(path.join(path.dirname(__file__), 'Icon.ico')))
+        self.setWindowIcon(QIcon(path.join(path.dirname(__file__), 'loader.ico')))
         self.setupApp()
 
     def setupApp(self):
